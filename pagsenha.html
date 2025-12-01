@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificador de Senha</title>
+  <style>
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid gray;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <h2>Digite sua senha:</h2>
+  <input type="password" id="senha" placeholder="Sua senha aqui" oninput="verificarForca(this.value)">
+
+  <script>
+    function verificarForca(senha) {
+      const campo = document.getElementById('senha');
+      let forca = 0;
+
+      if (senha.length >= 6) forca++;
+      if (/[A-Z]/.test(senha)) forca++;
+      if (/[0-9]/.test(senha)) forca++;
+      if (/[^A-Za-z0-9]/.test(senha)) forca++;
+
+      if (forca <= 1) {
+        campo.style.borderColor = 'red'; // Fraca
+      } else if (forca === 2 || forca === 3) {
+        campo.style.borderColor = 'orange'; // Média
+      } else {
+        campo.style.borderColor = 'green'; // Forte
+      }
+    }
+  </script>
+</body>
+</html>
